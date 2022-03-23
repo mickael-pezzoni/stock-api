@@ -1,0 +1,885 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Stock-API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Products"
+        },
+        {
+            "name": "Categories"
+        },
+        {
+            "name": "Authentication"
+        }
+    ],
+    "schemes": ["http"],
+    "paths": {
+        "/auth/signin": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Signin",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "username": "admin",
+                                    "password": "admin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Bad login",
+                        "headers": {
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Products"],
+                "summary": "Products",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "157"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"9d-JGPoy6moHiyZwInXCR5mjhIuQD0\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:27:00 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "name": "Ice-Tea",
+                                        "description": "Pêche",
+                                        "quantity": 50,
+                                        "createdAt": "2022-03-13T20:23:48.608Z",
+                                        "updatedAt": "2022-03-13T20:23:48.608Z",
+                                        "categoryId": 2
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Products"],
+                "summary": "New Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Ice-Tea",
+                                    "description": "Pêche",
+                                    "quantity": 50,
+                                    "categoryId": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "155"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"9b-0VxoDj9ESeU9ghVXkz1KX8ohFO0\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:23:48 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "name": "Ice-Tea",
+                                    "description": "Pêche",
+                                    "quantity": 50,
+                                    "categoryId": 2,
+                                    "id": 2,
+                                    "createdAt": "2022-03-13T20:23:48.608Z",
+                                    "updatedAt": "2022-03-13T20:23:48.608Z"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/products/{id}": {
+            "get": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Products"],
+                "summary": "Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "155"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"9b-emTJZeMeydmNMbkFzqXVnT9bkQQ\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:27:17 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "id": 2,
+                                    "name": "Ice-Tea",
+                                    "description": "Pêche",
+                                    "quantity": 50,
+                                    "createdAt": "2022-03-13T20:23:48.608Z",
+                                    "updatedAt": "2022-03-13T20:23:48.608Z",
+                                    "categoryId": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "summary": "Update Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Ice-Tea",
+                                    "description": "Pêche",
+                                    "quantity": 50,
+                                    "categoryId": 3
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "155"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"9b-emTJZeMeydmNMbkFzqXVnT9bkQQ\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:27:46 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "id": 2,
+                                    "name": "Ice-Tea",
+                                    "description": "Pêche",
+                                    "quantity": 50,
+                                    "createdAt": "2022-03-13T20:23:48.608Z",
+                                    "updatedAt": "2022-03-13T20:23:48.608Z",
+                                    "categoryId": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [{ "bearer": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "tags": ["Products"],
+                "summary": "Delete Product",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "23"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"17-PVQD/E0HAqMH9FRBYNXdIixTtCA\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:28:20 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "raw": [],
+                                    "affected": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "get": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Categories"],
+                "summary": "Categories",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "28"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"1c-QQ1dQXa9mQ+ZCVk6M8eV/EQHeac\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:25:58 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": [
+                                    {
+                                        "id": 2,
+                                        "name": "Boissons"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Categories"],
+                "summary": "New Category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Boissons"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "26"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"1a-Oy9A1UC/bfdTGu3iVPuaX1aLI78\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:22:15 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "name": "Boissons",
+                                    "id": 2
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "get": {
+                "security": [{ "bearer": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "tags": ["Categories"],
+                "summary": "Category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "195"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"c3-VzBc7VwXgXCELKRCEawa2W3t/SQ\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:26:19 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "id": 2,
+                                    "name": "Boissons",
+                                    "products": [
+                                        {
+                                            "id": 2,
+                                            "name": "Ice-Tea",
+                                            "description": "Pêche",
+                                            "quantity": 50,
+                                            "createdAt": "2022-03-13T20:23:48.608Z",
+                                            "updatedAt": "2022-03-13T20:23:48.608Z",
+                                            "categoryId": 2
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [{ "bearer": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "required": true,
+                        "in": "path",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
+                "tags": ["Categories"],
+                "summary": "Update Category",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "test"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "26"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"1a-ZYKGTFtoaGWW5xCp9P+lgW4z7iA\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:26:43 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "id": 2,
+                                    "name": "Boissons"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [{ "bearer": [] }],
+                "tags": ["Categories"],
+                "summary": "Delete Category",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "X-Powered-By": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Express"
+                                }
+                            },
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=utf-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "23"
+                                }
+                            },
+                            "ETag": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "W/\"17-PVQD/E0HAqMH9FRBYNXdIixTtCA\""
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Sun, 13 Mar 2022 20:28:31 GMT"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Keep-Alive": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "timeout=5"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "raw": [],
+                                    "affected": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
