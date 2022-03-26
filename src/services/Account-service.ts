@@ -9,7 +9,7 @@ import { compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 
 export interface LoginOutput {
-    username: string;
+    account: Omit<Account, 'password' | 'hashPassword'>;
     jwt: string;
 }
 
@@ -43,7 +43,7 @@ export class AccountService extends GlobalService<Account> {
             throw new NotAuthorizedError(`Bad login`);
         }
         const loginOutput: LoginOutput = {
-            username: account.username,
+            account: accountWithOutPassword,
             jwt: sign(accountWithOutPassword, environnement.API_SECRET_JWT, {
                 expiresIn: environnement.API_JWT_EXPIRATION,
             }),
