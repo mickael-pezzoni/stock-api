@@ -43,6 +43,11 @@ import { auth } from './middlewares/auth';
                 'products',
             ])
         )
+        .get('/:id/products', (context: Context) =>
+            productService.findByCategory(
+                context.params.getOrFail<number>('id')
+            )
+        )
         .post(
             '/',
             (context: Context) =>

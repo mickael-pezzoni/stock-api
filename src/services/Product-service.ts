@@ -27,4 +27,9 @@ export class ProductService extends GlobalService<Product> {
         const toUpdate = this.repository.create(dto);
         return this.repository.save({ ...product, ...toUpdate });
     }
+
+    async findByCategory(categoryId: number): Promise<Product[]> {
+        await this.categoryService.findOne(categoryId);
+        return this.repository.find({ where: { categoryId } });
+    }
 }
