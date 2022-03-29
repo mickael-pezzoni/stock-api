@@ -1,7 +1,7 @@
 import { CreateProductDto } from './../dtos/create-product.dto';
 import { CategoryService } from './Category-service';
 import { Product } from './../entities/Product.entity';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { GlobalService } from './Global-service';
 import { UpdateProductDto } from 'dtos/update-product.dto';
 
@@ -15,6 +15,15 @@ export class ProductService extends GlobalService<Product> {
         this.categoryService = categoryService;
     }
 
+    findAll(relations: string[] = [], categoryId?: number) {
+        const options: FindManyOptions = {
+            relations,
+        };
+        if (categoryId !== undefined) {
+            options.where = { categoryId };
+        }
+        return this.repository.find(options);
+    }
     async create(dto: CreateProductDto): Promise<Product> {
         await this.categoryService.findOne(dto.categoryId);
         const toCreate = this.repository.create(dto);

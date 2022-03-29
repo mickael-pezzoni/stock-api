@@ -68,7 +68,9 @@ import { auth } from './middlewares/auth';
         );
     const productController = new Controller('/products')
         .addMiddleware(auth)
-        .get('/', () => productService.find())
+        .get('/', (context: Context) =>
+            productService.findAll([], context.queryParams.get('categoryId'))
+        )
         .get('/:id', (context: Context) =>
             productService.findOne(context.params.getOrFail<number>('id'))
         )

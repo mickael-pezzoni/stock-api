@@ -77,6 +77,18 @@
             "get": {
                 "security": [{ "bearer": [] }],
                 "tags": ["Products"],
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "required": false,
+                        "in": "query",
+                        "schema": [
+                            {
+                                "type": "number"
+                            }
+                        ]
+                    }
+                ],
                 "summary": "Products",
                 "responses": {
                     "200": {

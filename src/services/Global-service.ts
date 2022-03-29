@@ -1,5 +1,5 @@
 import { NotFoundError } from 'speedily-js';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, FindManyOptions, Repository } from 'typeorm';
 export class GlobalService<T> {
     repository: Repository<T>;
     constructor(repository: Repository<T>) {
@@ -7,7 +7,10 @@ export class GlobalService<T> {
     }
 
     find(relations: string[] = []): Promise<T[]> {
-        return this.repository.find({ relations });
+        const options: FindManyOptions = {
+            relations,
+        };
+        return this.repository.find(options);
     }
 
     async findOne(id: number, relations: string[] = []): Promise<T> {
